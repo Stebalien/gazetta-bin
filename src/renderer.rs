@@ -104,7 +104,11 @@ impl Gazetta for MyGazetta {
                                 nav(id="site-nav") {
                                     ul {
                                         @ for link in &site.nav {
-                                            li(active? = page.href.starts_with(&link.href)) : link
+                                            li(class? = if page.href.starts_with(&link.href) {
+                                                Some("active")
+                                            } else {
+                                                None
+                                            }) : link
                                         }
                                     }
                                 }
