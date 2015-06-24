@@ -1,0 +1,17 @@
+[package]
+name = "blog"
+version = "0.1.0"
+authors = ["Steven Allen <steven@stebalien.com>"]
+
+[profile.dev]
+codegen-units=4
+
+[dependencies.gazetta]
+path = "../gazetta"
+
+[dependencies.horrorshow]
+git = "https://github.com/Stebalien/horrorshow-rs.git"
+branch="next"
+
+[dependencies]
+lazy_static = "*"
