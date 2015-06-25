@@ -15,4 +15,6 @@ git = "https://github.com/Stebalien/gazetta.git"
 
 [dependencies]
 lazy_static = "*"
+chrono = "*"
+clap = "*"
 horrorshow = "*"
