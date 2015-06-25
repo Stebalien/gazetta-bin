@@ -1,7 +1,11 @@
 [package]
-name = "blog"
+name = "gazetta-bin"
 version = "0.1.0"
 authors = ["Steven Allen <steven@stebalien.com>"]
+
+[[bin]]
+name="gazetta"
+path="src/main.rs"
 
 [profile.dev]
 codegen-units=4
@@ -15,6 +19,3 @@ branch="next"
 
 [dependencies]
 lazy_static = "*"
-
-[profile.release]
-lto=true
