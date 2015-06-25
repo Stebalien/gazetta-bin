@@ -77,7 +77,8 @@ impl MyGazetta {
             meta(itemprop="author",
                  itemscope,
                  itemtype="http://schema.org/Person",
-                 itemref="site-author");
+                 itemref="site-author",
+                 content="");
             header(id="page-header", class="title") {
                 h1(itemprop="headline") : &page.title;
                 : page.date.map(RenderDate::new);
@@ -92,7 +93,8 @@ impl MyGazetta {
                             meta(itemprop="author",
                                  itemscope,
                                  itemtype="http://schema.org/Person",
-                                 itemref="site-author");
+                                 itemref="site-author",
+                                 content="");
                             header(class="title") {
                                 h1(itemprop="headline") {
                                     a(href=&entry.href, itemprop="url sameAs") : &entry.title;
