@@ -149,49 +149,46 @@ impl Gazetta for MyGazetta {
                     script : raw!("hljs.configure({languages: []}); hljs.initHighlightingOnLoad();");
                 }
                 body {
-                    div(id="outer") {
-                        div(id="container") {
-                            header(id="site-header") {
-                                h1(itemprop="headline name") {
-                                    a(class="brand", href="/") : &site.title
-                                }
-                                nav(id="site-nav") {
-                                    ul {
-                                        @ for link in &site.nav {
-                                            li(class? = if page.href.starts_with(&link.href) {
-                                                Some("active")
-                                            } else {
-                                                None
-                                            }) : link
-                                        }
+                    header(id="site-header") {
+                        h1(itemprop="headline name") {
+                            a(class="brand", href="/") : &site.title
+                        }
+
+                        @ if !site.nav.is_empty() {
+                            nav(id="site-nav") {
+                                ul {
+                                    @ for link in &site.nav {
+                                        li(class? = if page.href.starts_with(&link.href) {
+                                            Some("active")
+                                        } else {
+                                            None
+                                        }) : link
                                     }
                                 }
                             }
-                            div(id="inner-container") {
-                                main(id="inner-content") {
-                                    @ if page.content.data.trim().is_empty() {
-                                        section(itemscope, itemtype="http://schema.org/WebPage") {
-                                            |tmpl| self.render_page_inner(site, page, tmpl);
-                                        }
-                                    } else {
-                                        article(itemscope, itemtype="http://schema.org/Article") {
-                                            |tmpl| self.render_page_inner(site, page, tmpl);
-                                        }
-                                    }
-                                }
-                                footer(class="copyright") {
-                                    p {
-                                        : raw!("&copy; ");
-                                        span(itemprop="author copyrightHolder",
-                                             itemscope,
-                                             itemtype="http://schema.org/Person") {
-                                            span(id="site-author") {
-                                                span(itemprop="name", class="fn") : &site.author.name;
-                                                @ if let Some(ref e) = site.author.email {
-                                                    meta(class="email", itemprop="email", content=e)
-                                                }
-                                            }
-                                        }
+                        }
+                    }
+                    main(id="site-content") {
+                        @ if page.content.data.trim().is_empty() {
+                            section(itemscope, itemtype="http://schema.org/WebPage") {
+                                |tmpl| self.render_page_inner(site, page, tmpl);
+                            }
+                        } else {
+                            article(itemscope, itemtype="http://schema.org/Article") {
+                                |tmpl| self.render_page_inner(site, page, tmpl);
+                            }
+                        }
+                    }
+                    footer(id="site-footer", class="copyright") {
+                        p {
+                            : raw!("&copy; ");
+                            span(itemprop="author copyrightHolder",
+                                 itemscope,
+                                 itemtype="http://schema.org/Person") {
+                                span(id="site-author") {
+                                    span(itemprop="name", class="fn") : &site.author.name;
+                                    @ if let Some(ref e) = site.author.email {
+                                        meta(class="email", itemprop="email", content=e)
                                     }
                                 }
                             }
