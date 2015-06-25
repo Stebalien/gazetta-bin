@@ -150,7 +150,6 @@ impl Gazetta for MyGazetta {
                 }
                 body {
                     div(id="outer") {
-                        div(id="pusher") {}
                         div(id="container") {
                             header(id="site-header") {
                                 h1(itemprop="headline name") {
