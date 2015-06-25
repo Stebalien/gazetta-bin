@@ -89,7 +89,7 @@ impl MyGazetta {
             @ if let Some(ref idx) = page.index {
                 div(id="page-index") {
                     @ for entry in idx.entries.iter() {
-                        article(itemscope, itemtype="http://schema.org/Article", class="index-item") {
+                        article(itemscope, itemtype="http://schema.org/Article") {
                             meta(itemprop="author",
                                  itemscope,
                                  itemtype="http://schema.org/Person",
@@ -107,7 +107,7 @@ impl MyGazetta {
                 }
                 @ if let Some(ref paginate) = idx.paginate {
                     footer {
-                        nav(class="pagination") {
+                        nav(id="page-pagination") {
                             div {
                                 @ if paginate.current == 0 {
                                     span(class="prev disabled") : raw!("&larr; Previous");
@@ -153,7 +153,7 @@ impl Gazetta for MyGazetta {
                 body {
                     header(id="site-header") {
                         h1(itemprop="headline name") {
-                            a(class="brand", href="/") : &site.title
+                            a(href="/") : &site.title
                         }
 
                         @ if !site.nav.is_empty() {
@@ -181,16 +181,16 @@ impl Gazetta for MyGazetta {
                             }
                         }
                     }
-                    footer(id="site-footer", class="copyright") {
+                    footer(id="site-footer") {
                         p {
                             : raw!("&copy; ");
                             span(itemprop="author copyrightHolder",
                                  itemscope,
                                  itemtype="http://schema.org/Person") {
                                 span(id="site-author") {
-                                    span(itemprop="name", class="fn") : &site.author.name;
+                                    span(itemprop="name") : &site.author.name;
                                     @ if let Some(ref e) = site.author.email {
-                                        meta(class="email", itemprop="email", content=e)
+                                        meta(itemprop="email", content=e)
                                     }
                                 }
                             }
