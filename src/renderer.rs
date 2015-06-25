@@ -71,6 +71,61 @@ impl MyGazetta {
             unknown => tmpl.record_error(format!("unknown layout '{}'", unknown)),
         }
     }
+
+    fn render_page_inner(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
+        tmpl << html! {
+            meta(itemprop="author",
+                 itemscope,
+                 itemtype="http://schema.org/Person",
+                 itemref="site-author");
+            header(id="page-header", class="title") {
+                h1(itemprop="headline") : &page.title;
+                : page.date.map(RenderDate::new);
+            }
+            div(id="page-content") {
+                |tmpl| self.render_content(site, page, tmpl);
+            }
+            @ if let Some(ref idx) = page.index {
+                div(id="page-index") {
+                    @ for entry in idx.entries.iter() {
+                        article(itemscope, itemtype="http://schema.org/Article", class="index-item") {
+                            meta(itemprop="author",
+                                 itemscope,
+                                 itemtype="http://schema.org/Person",
+                                 itemref="site-author");
+                            header(class="title") {
+                                h1(itemprop="headline") {
+                                    a(href=&entry.href, itemprop="url sameAs") : &entry.title;
+                                }
+                                : entry.date.map(RenderDate::new);
+                            }
+                            |tmpl| self.render_content(site, entry, tmpl);
+                        }
+                    }
+                }
+                @ if let Some(ref paginate) = idx.paginate {
+                    footer {
+                        nav(class="pagination") {
+                            div {
+                                @ if paginate.current == 0 {
+                                    span(class="prev disabled") : raw!("&larr; Previous");
+                                } else {
+                                    a(href=paginate.pages[paginate.current-1], class="prev", title="previous") : raw!("&larr; Previous");
+                                }
+
+                                span : format_args!("{} of {}", paginate.current + 1, paginate.pages.len());
+                                @ if paginate.current + 1 == paginate.pages.len() {
+                                    span(class="next disabled") : raw!("Next &rarr;");
+                                } else {
+                                    a(href=paginate.pages[paginate.current+1], class="next", title="next") : raw!("Next &rarr;");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    }
 }
 
 impl Gazetta for MyGazetta {
@@ -115,64 +170,13 @@ impl Gazetta for MyGazetta {
                             }
                             div(id="inner-container") {
                                 main(id="inner-content") {
-                                    @ if let Some(ref idx) = page.index {
-                                        header(class="title", id="page-header") {
-                                            h2 : &page.title
-                                        }
-                                        div(id="page-content") {
-                                            |tmpl| self.render_content(site, page, tmpl);
-                                        }
-                                        div(id="page-index") {
-                                            @ for entry in idx.entries.iter() {
-                                                article(itemscope, itemtype="http://schema.org/Article", class="index-item") {
-                                                    meta(itemprop="author",
-                                                         itemscope,
-                                                         itemtype="http://schema.org/Person",
-                                                         itemref="site-author");
-                                                    header(class="title") {
-                                                        h1(itemprop="headline") {
-                                                            a(href=&entry.href, itemprop="url sameAs") : &entry.title;
-                                                        }
-                                                        : entry.date.map(RenderDate::new);
-                                                    }
-                                                    |tmpl| self.render_content(site, entry, tmpl);
-                                                }
-                                            }
-                                        }
-                                        @ if let Some(ref paginate) = idx.paginate {
-                                            footer {
-                                                nav(class="pagination") {
-                                                    div {
-                                                        @ if paginate.current == 0 {
-                                                            span(class="prev disabled") : raw!("&larr; Previous");
-                                                        } else {
-                                                            a(href=paginate.pages[paginate.current-1], class="prev", title="previous") : raw!("&larr; Previous");
-                                                        }
-
-                                                        span : format_args!("{} of {}", paginate.current + 1, paginate.pages.len());
- 
-                                                        @ if paginate.current + 1 == paginate.pages.len() {
-                                                            span(class="next disabled") : raw!("Next &rarr;");
-                                                        } else {
-                                                            a(href=paginate.pages[paginate.current+1], class="next", title="next") : raw!("Next &rarr;");
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                    @ if page.content.data.trim().is_empty() {
+                                        section(itemscope, itemtype="http://schema.org/WebPage") {
+                                            |tmpl| self.render_page_inner(site, page, tmpl);
                                         }
                                     } else {
-                                        article(itemscope, itemtype="http://schema.org/Article", class="page") {
-                                            meta(itemprop="author",
-                                                 itemscope,
-                                                 itemtype="http://schema.org/Person",
-                                                 itemref="site-author");
-                                            header(id="page-header", class="title") {
-                                                h1(itemprop="headline") : &page.title;
-                                                : page.date.map(RenderDate::new);
-                                            }
-                                            div(id="page-content") {
-                                                |tmpl| self.render_content(site, page, tmpl);
-                                            }
+                                        article(itemscope, itemtype="http://schema.org/Article") {
+                                            |tmpl| self.render_page_inner(site, page, tmpl);
                                         }
                                     }
                                 }

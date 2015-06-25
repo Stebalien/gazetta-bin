@@ -15,3 +15,6 @@ branch="next"
 
 [dependencies]
 lazy_static = "*"
+
+[profile.release]
+lto=true
