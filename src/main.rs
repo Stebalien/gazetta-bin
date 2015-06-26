@@ -63,6 +63,7 @@ fn main() {
         .arg(Arg::with_name("SOURCE")
              .short("s")
              .long("source")
+             .takes_value(true)
              .help("Specify the source directory (defaults to the current directory)"))
         .subcommand(SubCommand::new("render")
                     .about("Render the website")
