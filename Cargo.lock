@@ -5,7 +5,7 @@ dependencies = [
  "chrono 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "clap 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "gazetta 0.1.0 (git+https://github.com/Stebalien/gazetta.git)",
- "horrorshow 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "horrorshow 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.11 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -35,11 +35,11 @@ dependencies = [
 [[package]]
 name = "gazetta"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/gazetta.git#0b79cc82496cdcf9fe68d386db969796fb93d158"
+source = "git+https://github.com/Stebalien/gazetta.git#1c3f771c321484e8a761f015f5c0ea1cec3363bf"
 dependencies = [
  "chrono 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "glob 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
- "horrorshow 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "horrorshow 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "pulldown-cmark 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "yaml-rust 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -65,7 +65,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "horrorshow"
-version = "0.5.0"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]

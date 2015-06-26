@@ -26,15 +26,23 @@ impl Meta for SourceMeta {
     fn from_yaml(mut meta: Hash) -> Result<SourceMeta, &'static str> {
         Ok(SourceMeta {
             nav: match meta.remove(&NAV) {
-                Some(Yaml::Hash(nav_data)) => try!(nav_data.into_iter().map(|pair| match pair {
-                    (Yaml::String(k), Yaml::String(v)) => Ok(Link {
-                        text: k,
-                        href: v,
-                        title: None
-                    }),
-                    _ => Err("nav items must be strings"),
+                Some(Yaml::Array(nav_data)) => try!(nav_data.into_iter().map(|item| match item {
+                    Yaml::Hash(item) => {
+                        if item.len() != 1 {
+                            return Err("nav mappings must have exactly one entry".into());
+                        }
+                        match item.into_iter().next().unwrap() {
+                            (Yaml::String(k), Yaml::String(v)) => Ok(Link {
+                                text: k,
+                                href: v,
+                                title: None
+                            }),
+                            _ => Err("nav items must be in the form `title: url`"),
+                        }
+                    },
+                    _ => return Err("nav items must be in the form `title: url`"),
                 }).collect()),
-                Some(..) => return Err("nav must be a hash"),
+                Some(..) => return Err("You must provide a list of nav items"),
                 None => Vec::new(),
             },
             author: match meta.remove(&AUTHOR) {
