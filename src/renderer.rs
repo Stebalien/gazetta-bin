@@ -139,16 +139,10 @@ impl Gazetta for MyGazetta {
             : raw!("<!DOCTYPE html>");
             html(lang="en", itemtype="http://schema.org/WebSite", itemscope) {
                 head {
-                    meta(charset="utf-8");
                     title : &page.title;
                     meta(name="viewport", content="width=device-width, initial-scale=1.0");
                     meta(name="author", content=&site.author.name);
-                    link(rel="stylesheet", href="/static/stylesheets/reset.css");
-                    link(rel="stylesheet", href="/static/stylesheets/highlight.css");
-                    link(rel="stylesheet", href="/static/stylesheets/main.css");
-                    link(rel="shortcut icon", href="/static/img/icon.png");
-                    script(src="/static/javascript/highlight.js") {}
-                    script : raw!("hljs.configure({languages: []}); hljs.initHighlightingOnLoad();");
+                    : site;
                 }
                 body {
                     header(id="site-header") {
