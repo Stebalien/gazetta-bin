@@ -11,7 +11,7 @@ dependencies = [
 
 [[package]]
 name = "ansi_term"
-version = "0.6.2"
+version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -28,14 +28,14 @@ name = "clap"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "ansi_term 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ansi_term 0.6.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "strsim 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "gazetta"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/gazetta.git#1c3f771c321484e8a761f015f5c0ea1cec3363bf"
+source = "git+https://github.com/Stebalien/gazetta.git#e91552347a525933bfdabf4ef1dec914abcb5705"
 dependencies = [
  "chrono 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "glob 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
