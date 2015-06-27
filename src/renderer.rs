@@ -19,8 +19,10 @@ impl MyGazetta {
         tmpl << html! {
             div(id="about", itemscope, itemtype="http://schema.org/Person") {
                 div(id="about-header") {
-                    div(id="about-logo") {
-                        img(itemprop="image", src="/static/img/logo.png", alt="Logo");
+                    @ if let Some(ref photo) = site.author.photo {
+                        div(id="about-photo") {
+                            img(itemprop="image", src=photo, alt="Photo");
+                        }
                     }
                     div(id="about-name") {
                         div(id="about-realname", itemprop="name") : &site.author.name;

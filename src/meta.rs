@@ -15,6 +15,7 @@ lazy_static! {
     static ref URL: Yaml = Yaml::String("url".into());
     static ref FINGERPRINT: Yaml = Yaml::String("fingerprint".into());
     static ref NICKNAMES: Yaml = Yaml::String("nicknames".into());
+    static ref PHOTO: Yaml = Yaml::String("photo".into());
 }
 
 pub struct SourceMeta {
@@ -52,6 +53,11 @@ impl Meta for SourceMeta {
                         None => return Err("missing author name"),
                         _ => return Err("author name must be a string"),
                     },
+                    photo: match author.remove(&PHOTO) {
+                        Some(Yaml::String(photo)) => Some(photo),
+                        None => None,
+                        _ => return Err("if specified, author photo must be a string"),
+                    },
                     email: match author.remove(&EMAIL) {
                         Some(Yaml::String(email)) => Some(email),
                         None => None,
@@ -87,6 +93,7 @@ impl Meta for SourceMeta {
                     name: name,
                     email: None,
                     key: None,
+                    photo: None,
                     nicknames: Vec::new(),
                 },
                 Some(..) => return Err("invalid author"),

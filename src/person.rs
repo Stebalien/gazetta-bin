@@ -4,6 +4,7 @@ use std::fmt;
 pub struct Person {
     pub name: String,
     pub email: Option<String>,
+    pub photo: Option<String>,
     pub key: Option<Key>,
     pub nicknames: Vec<String>,
 }
