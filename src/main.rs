@@ -94,14 +94,15 @@ fn main() {
     match matches.subcommand() {
         ("render", Some(matches)) => {
             let dest_path: &Path = matches.value_of("DEST").unwrap().as_ref();
-            if matches.is_present("FORCE") {
-                match fs::remove_dir_all(dest_path) {
-                    Ok(_) => (),
-                    Err(e) => bail!("Failed to remove '{}': {}", dest_path.display(), e),
-                }
-            }
             if fs::metadata(&dest_path).is_ok() {
-                bail!("Target '{}' exists.", dest_path.display());
+                if matches.is_present("FORCE") {
+                    match fs::remove_dir_all(dest_path) {
+                        Ok(_) => (),
+                        Err(e) => bail!("Failed to remove '{}': {}", dest_path.display(), e),
+                    }
+                } else {
+                    bail!("Target '{}' exists.", dest_path.display());
+                }
             }
             let source = try_exit!(gazetta::Source::new(&source_path));
             try_exit!(MyGazetta.render(&source, &dest_path));
