@@ -3,6 +3,7 @@ extern crate horrorshow;
 extern crate gazetta;
 extern crate chrono;
 extern crate clap;
+extern crate slug;
 
 #[macro_use]
 extern crate lazy_static;
@@ -16,6 +17,7 @@ use std::fs::File;
 
 use clap::{Arg, App, SubCommand};
 use gazetta::prelude::*;
+use slug::slugify;
 
 mod link;
 mod person;
@@ -41,19 +43,6 @@ macro_rules! bail {
         let _ = writeln!(stderr, $($toks)*);
         process::exit(1)
     }}
-}
-
-fn slugify(s: &str) -> String {
-    let mut output = String::with_capacity(s.len());
-    for c in s.trim().chars() {
-        match c {
-            '_'|'-'|'a'...'z'|'0'...'9' => output.push(c),
-            'A'...'Z' => output.push(((c as u8)-('A' as u8)+('a' as u8)) as char), // Poor mans ASCII case conversion.
-            _ if c.is_whitespace() && !output.ends_with("-") => output.push('-'),
-            _ => {},
-        }
-    }
-    output
 }
 
 fn main() {

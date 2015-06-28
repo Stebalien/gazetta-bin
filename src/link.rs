@@ -1,8 +1,9 @@
 use horrorshow::prelude::*;
 
+#[derive(Clone, Hash, Debug)]
 pub struct Link {
     pub text: String,
-    pub href: String,
+    pub url: String,
     pub title: Option<String>,
 }
 
@@ -22,7 +23,7 @@ impl RenderMut for Link {
 impl Render for Link {
     fn render(&self, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
-            a(href=&self.href, title=self.title.as_ref()) : &self.text
+            a(href=&self.url, title=self.title.as_ref()) : &self.text
         };
     }
 }

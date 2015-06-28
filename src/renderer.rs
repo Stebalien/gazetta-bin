@@ -8,46 +8,71 @@ pub struct MyGazetta;
 
 template! {
     RenderDate(date: &::gazetta::model::Date) {
-        time(itemprop="dateCreated", datetime=format_args!("{:04}-{:02}-{:02}", date.year(), date.month(), date.day())) {
+        time(datetime=format_args!("{:04}-{:02}-{:02}", date.year(), date.month(), date.day())) {
             : format_args!("{:04}-{:02}-{:02}", date.year(), date.month(), date.day())
         }
     }
 }
 
 impl MyGazetta {
-    fn render_about(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
+    fn render_page_inner(&self, _site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
-            div(id="about", itemscope, itemtype="http://schema.org/Person") {
-                div(id="about-header") {
-                    @ if let Some(ref photo) = site.author.photo {
+            header(id="page-header", class="title") {
+                h1 : &page.title;
+                : page.date.map(RenderDate::new);
+            }
+            @ if let Some(ref person) = page.author {
+                span(id="page-author") {
+                    @ if let Some(ref email) = person.email {
+                        a(href=format_args!("mailto:{}", email)) : &person.name;
+                    } else {
+                        : &person.name
+                    }
+                }
+            }
+            @ if let Some(ref about) = page.about {
+                div(id="about") {
+                    @ if let Some(ref photo) = about.photo {
                         div(id="about-photo") {
-                            img(itemprop="image", src=photo, alt="Photo");
+                            img(src=photo, alt="Photo");
                         }
                     }
                     div(id="about-name") {
-                        div(id="about-realname", itemprop="name") : &site.author.name;
-                        @ if !site.author.nicknames.is_empty() {
+                        div(id="about-realname") : &about.name;
+                        @ if !about.nicknames.is_empty() {
                             ul(id="about-nicks") {
-                                @ for nick in &site.author.nicknames {
-                                    li(itemprop="additionalName"): nick
+                                @ for nick in &about.nicknames {
+                                    li: nick
                                 }
                             }
                         }
                     }
                     table(id="about-extra") {
-                        @ if let Some(ref email) = site.author.email {
+                        @ if let Some(ref email) = about.email {
                             tr {
-                                th : "Email:";
+                                th : "Email";
                                 td {
-                                    a(itemprop="email",
-                                      href=format_args!("mailto:{}", email)
-                                      ): &site.author.email;
+                                    a(href=format_args!("mailto:{}", email)): &about.email;
                                 }
                             }
                         }
-                        @ if let Some(ref key) = site.author.key {
+                        @ if !about.also.is_empty() {
                             tr {
-                                th: "PGP Key:";
+                                th : "Also";
+                                td {
+                                    ul(id="about-also") {
+                                        @ for link in &about.also {
+                                            li {
+                                                a(href=&link.url, rel="me"): &link.text;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        @ if let Some(ref key) = about.key {
+                            tr {
+                                th : "PGP Key";
                                 td {
                                     a(href=&key.url): &key.fingerprint;
                                 }
@@ -55,55 +80,21 @@ impl MyGazetta {
                         }
                     }
                 }
-                div(itemprop="text", class="content") : page;
             }
-        };
-    }
-
-    fn render_default(&self, _site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
-        tmpl << html! {
-            div(class="content", itemprop="text") : page;
-        };
-    }
-
-    fn render_content(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
-        match &*page.layout {
-            "default" => self.render_default(site, page, tmpl),
-            "about" => self.render_about(site, page, tmpl),
-            unknown => tmpl.record_error(format!("unknown layout '{}'", unknown)),
-        }
-    }
-
-    fn render_page_inner(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
-        tmpl << html! {
-            meta(itemprop="author",
-                 itemscope,
-                 itemtype="http://schema.org/Person",
-                 itemref="site-author",
-                 content="");
-            header(id="page-header", class="title") {
-                h1(itemprop="headline") : &page.title;
-                : page.date.map(RenderDate::new);
-            }
-            div(id="page-content") {
-                |tmpl| self.render_content(site, page, tmpl);
+            @ if !page.content.data.trim().is_empty() {
+                div(id="page-content", class="content") : page;
             }
             @ if let Some(ref idx) = page.index {
                 div(id="page-index") {
                     @ for entry in idx.entries.iter() {
-                        article(itemscope, itemtype="http://schema.org/Article") {
-                            meta(itemprop="author",
-                                 itemscope,
-                                 itemtype="http://schema.org/Person",
-                                 itemref="site-author",
-                                 content="");
+                        article {
                             header(class="title") {
-                                h1(itemprop="headline") {
-                                    a(href=&entry.href, itemprop="url sameAs") : &entry.title;
+                                h1 {
+                                    a(href=&entry.href, rel="canonical") : &entry.title;
                                 }
                                 : entry.date.map(RenderDate::new);
                             }
-                            |tmpl| self.render_content(site, entry, tmpl);
+                            div(class="content") : entry;
                         }
                     }
                 }
@@ -128,7 +119,7 @@ impl MyGazetta {
                     }
                 }
             }
-        };
+        }
     }
 }
 
@@ -139,16 +130,20 @@ impl Gazetta for MyGazetta {
     fn render_page(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             : raw!("<!DOCTYPE html>");
-            html(lang="en", itemtype="http://schema.org/WebSite", itemscope) {
+            html(lang="en") {
                 head {
                     title : &page.title;
                     meta(name="viewport", content="width=device-width, initial-scale=1.0");
-                    meta(name="author", content=&site.author.name);
+                    @ if let Some(ref person) = page.author {
+                        meta(name="author", content=&person.name);
+                    } else {
+                        meta(name="author", content=&site.author.name);
+                    }
                     : site;
                 }
                 body {
                     header(id="site-header") {
-                        h1(itemprop="headline name") {
+                        h1 {
                             a(href="/") : &site.title
                         }
 
@@ -156,7 +151,7 @@ impl Gazetta for MyGazetta {
                             nav(id="site-nav") {
                                 ul {
                                     @ for link in &site.nav {
-                                        li(class? = if page.href.starts_with(&link.href) {
+                                        li(class? = if page.href.starts_with(&link.url) {
                                             Some("active")
                                         } else {
                                             None
@@ -168,11 +163,11 @@ impl Gazetta for MyGazetta {
                     }
                     main(id="site-content") {
                         @ if page.content.data.trim().is_empty() {
-                            section(itemscope, itemtype="http://schema.org/WebPage") {
+                            section {
                                 |tmpl| self.render_page_inner(site, page, tmpl);
                             }
                         } else {
-                            article(itemscope, itemtype="http://schema.org/Article") {
+                            article {
                                 |tmpl| self.render_page_inner(site, page, tmpl);
                             }
                         }
@@ -180,16 +175,7 @@ impl Gazetta for MyGazetta {
                     footer(id="site-footer") {
                         p {
                             : raw!("&copy; ");
-                            span(itemprop="author copyrightHolder",
-                                 itemscope,
-                                 itemtype="http://schema.org/Person") {
-                                span(id="site-author") {
-                                    span(itemprop="name") : &site.author.name;
-                                    @ if let Some(ref e) = site.author.email {
-                                        meta(itemprop="email", content=e)
-                                    }
-                                }
-                            }
+                            span(id="site-author") : &site.author.name;
                         }
                     }
                 }

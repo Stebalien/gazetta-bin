@@ -13,6 +13,9 @@ codegen-units=4
 [dependencies.gazetta]
 git = "https://github.com/Stebalien/gazetta.git"
 
+[dependencies.slug]
+git = "https://github.com/Stebalien/slug-rs.git"
+
 [dependencies]
 lazy_static = "*"
 chrono = "*"

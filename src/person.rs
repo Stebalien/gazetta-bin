@@ -1,4 +1,5 @@
 use std::fmt;
+use link::Link;
 
 #[derive(Debug, Clone)]
 pub struct Person {
@@ -7,6 +8,7 @@ pub struct Person {
     pub photo: Option<String>,
     pub key: Option<Key>,
     pub nicknames: Vec<String>,
+    pub also: Vec<Link>,
 }
 
 #[derive(Debug, Clone)]
