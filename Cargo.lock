@@ -34,11 +34,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "debug-builders"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
 name = "gazetta"
 version = "0.1.0"
 source = "git+https://github.com/Stebalien/gazetta.git#e91552347a525933bfdabf4ef1dec914abcb5705"
@@ -102,38 +97,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "phf"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "debug-builders 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "phf_shared 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "phf_codegen"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "phf_generator 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "phf_shared 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "phf_generator"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "phf_shared 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "phf_shared"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
 name = "pulldown-cmark"
 version = "0.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -157,9 +120,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "slug"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/slug-rs.git#3db63e11a7ea690228c93abe35968e2ca2eaaf20"
+source = "git+https://github.com/Stebalien/slug-rs.git#90671dda51708639d5d0b7d5ee5eedd3c8856715"
 dependencies = [
- "unidecode 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
+ "unidecode 0.1.9 (git+https://github.com/Stebalien/rust-unidecode.git)",
 ]
 
 [[package]]
@@ -179,11 +142,7 @@ dependencies = [
 [[package]]
 name = "unidecode"
 version = "0.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-dependencies = [
- "phf 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "phf_codegen 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
-]
+source = "git+https://github.com/Stebalien/rust-unidecode.git#69d5f0341b08a6c7ab55eb705ca9b42634481cdd"
 
 [[package]]
 name = "yaml-rust"
