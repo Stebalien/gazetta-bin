@@ -63,7 +63,7 @@ impl MyGazetta {
                                     ul(id="about-also") {
                                         @ for link in &about.also {
                                             li {
-                                                a(href=&link.url, rel="me"): &link.text;
+                                                a(href=&link.url, rel="nofollow me"): &link.text;
                                             }
                                         }
                                     }
