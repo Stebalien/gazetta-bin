@@ -2,12 +2,12 @@
 name = "gazetta-bin"
 version = "0.1.0"
 dependencies = [
- "chrono 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
- "clap 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "chrono 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
+ "clap 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "gazetta 0.1.0 (git+https://github.com/Stebalien/gazetta.git)",
  "horrorshow 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.11 (registry+https://github.com/rust-lang/crates.io-index)",
- "slug 0.1.0 (git+https://github.com/Stebalien/slug-rs.git)",
+ "slug 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -17,16 +17,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "chrono"
-version = "0.2.14"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "num 0.1.25 (registry+https://github.com/rust-lang/crates.io-index)",
- "time 0.1.26 (registry+https://github.com/rust-lang/crates.io-index)",
+ "time 0.1.30 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "clap"
-version = "0.11.0"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "ansi_term 0.6.3 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -36,20 +36,15 @@ dependencies = [
 [[package]]
 name = "gazetta"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/gazetta.git#e91552347a525933bfdabf4ef1dec914abcb5705"
+source = "git+https://github.com/Stebalien/gazetta.git#3bee12f286149ef32a5253f1c26a6c525dbdbe50"
 dependencies = [
- "chrono 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
+ "chrono 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "glob 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
  "horrorshow 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "pulldown-cmark 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "yaml-rust 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "yaml-rust 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
-
-[[package]]
-name = "gcc"
-version = "0.3.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "getopts"
@@ -68,6 +63,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "horrorshow"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "kernel32-sys"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "winapi 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi-build 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "lazy_static"
@@ -120,9 +124,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "slug"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/slug-rs.git#90671dda51708639d5d0b7d5ee5eedd3c8856715"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "unidecode 0.1.9 (git+https://github.com/Stebalien/rust-unidecode.git)",
+ "unidecode 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -132,20 +136,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "time"
-version = "0.1.26"
+version = "0.1.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gcc 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "kernel32-sys 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "unidecode"
-version = "0.1.9"
-source = "git+https://github.com/Stebalien/rust-unidecode.git#69d5f0341b08a6c7ab55eb705ca9b42634481cdd"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "winapi"
+version = "0.1.23"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "winapi-build"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "yaml-rust"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
