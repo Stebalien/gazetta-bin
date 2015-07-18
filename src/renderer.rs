@@ -147,6 +147,7 @@ impl Gazetta for MyGazetta {
             : raw!("<!DOCTYPE html>");
             html(lang="en") {
                 head {
+                    : site;
                     title : &page.title;
                     meta(name="viewport", content="width=device-width, initial-scale=1.0");
                     @ if let Some(ref person) = page.author {
@@ -154,12 +155,11 @@ impl Gazetta for MyGazetta {
                     } else {
                         meta(name="author", content=&site.author.name);
                     }
-                    : site;
                 }
                 body {
                     header(id="site-header") {
                         h1 {
-                            a(href="/") : &site.title
+                            a(href="") : &site.title
                         }
 
                         @ if !site.nav.is_empty() {
