@@ -36,13 +36,14 @@ dependencies = [
 [[package]]
 name = "gazetta"
 version = "0.1.0"
-source = "git+https://github.com/Stebalien/gazetta.git#003a8a3e747155d2ffdf67af1a15adfae4cac776"
+source = "git+https://github.com/Stebalien/gazetta.git#c609ad777ec2884c73d6b117542066903518f7b4"
 dependencies = [
  "chrono 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "glob 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
  "horrorshow 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "pulldown-cmark 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "str_stack 0.1.0 (git+https://github.com/Stebalien/str_stack.git)",
  "url 0.2.36 (registry+https://github.com/rust-lang/crates.io-index)",
  "yaml-rust 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -134,6 +135,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "unidecode 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "str_stack"
+version = "0.1.0"
+source = "git+https://github.com/Stebalien/str_stack.git#72f9661080d76d2b9b81b310cb8fef467c868961"
 
 [[package]]
 name = "strsim"
