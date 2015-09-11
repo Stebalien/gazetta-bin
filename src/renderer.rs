@@ -14,27 +14,18 @@
  */
 
 use gazetta::prelude::*;
-use gazetta::{ Site, Page };
+use gazetta::render;
 use horrorshow::prelude::*;
-
-use super::meta::{SourceMeta, EntryMeta};
+use gazetta::{ SourceMeta, EntryMeta, Site, Page };
 
 pub struct MyGazetta;
-
-template! {
-    RenderDate(date: &::gazetta::model::Date) {
-        time(datetime=format_args!("{:04}-{:02}-{:02}", date.year(), date.month(), date.day())) {
-            : format_args!("{:04}-{:02}-{:02}", date.year(), date.month(), date.day())
-        }
-    }
-}
 
 impl MyGazetta {
     fn render_page_inner(&self, _site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             header(id="page-header", class="title") {
                 h1 : &page.title;
-                : page.date.map(RenderDate::new);
+                : page.date.map(render::Date);
             }
             @ if let Some(ref person) = page.author {
                 span(id="page-author") {
@@ -97,7 +88,7 @@ impl MyGazetta {
                 }
             }
             @ if !page.content.data.trim().is_empty() {
-                div(id="page-content", class="content") : page;
+                div(id="page-content", class="content") : render::Content(page);
             }
             @ if let Some(ref idx) = page.index {
                 div(id="page-index") {
@@ -107,9 +98,9 @@ impl MyGazetta {
                                 h1 {
                                     a(href=&entry.href, rel="canonical") : &entry.title;
                                 }
-                                : entry.date.map(RenderDate::new);
+                                : entry.date.map(render::Date);
                             }
-                            div(class="content") : entry;
+                            div(class="content") : render::Content(entry);
                         }
                     }
                 }
@@ -147,14 +138,17 @@ impl Gazetta for MyGazetta {
             : raw!("<!DOCTYPE html>");
             html(lang="en") {
                 head {
-                    : site;
-                    title : &page.title;
-                    meta(name="viewport", content="width=device-width, initial-scale=1.0");
+                    meta(charset="utf-8");
+                    meta(name="viewport",
+                         content="width=device-width, initial-scale=1.0");
                     @ if let Some(ref person) = page.author {
                         meta(name="author", content=&person.name);
                     } else {
                         meta(name="author", content=&site.author.name);
                     }
+                    title : &page.title;
+
+                    : render::Assets(site);
                 }
                 body {
                     header(id="site-header") {
@@ -170,7 +164,9 @@ impl Gazetta for MyGazetta {
                                             Some("active")
                                         } else {
                                             None
-                                        }) : link
+                                        }) {
+                                            a(href=&link.url) : &link.text
+                                        }
                                     }
                                 }
                             }

@@ -15,8 +15,4 @@ codegen-units=4
 path = "../gazetta"
 
 [dependencies]
-slug = "*"
-lazy_static = "*"
-chrono = "*"
-clap = "*"
 horrorshow = "*"
