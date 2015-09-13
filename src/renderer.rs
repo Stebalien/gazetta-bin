@@ -22,7 +22,7 @@ use gazetta::{ SourceMeta, EntryMeta, Site, Page };
 pub struct MyGazetta;
 
 impl MyGazetta {
-    fn render_page_inner(&self, _site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
+    fn render_page_inner(&self, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             header(id="page-header", class="title") {
                 h1 : &page.title;
@@ -184,11 +184,11 @@ impl Gazetta for MyGazetta {
                     main(id="site-content") {
                         @ if page.content.data.trim().is_empty() {
                             section {
-                                |tmpl| self.render_page_inner(site, page, tmpl);
+                                |tmpl| self.render_page_inner(page, tmpl);
                             }
                         } else {
                             article {
-                                |tmpl| self.render_page_inner(site, page, tmpl);
+                                |tmpl| self.render_page_inner(page, tmpl);
                             }
                         }
                     }
