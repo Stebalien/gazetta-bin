@@ -97,7 +97,7 @@ impl MyGazetta {
                         article {
                             header(class="title") {
                                 h1 {
-                                    a(href=&entry.href, rel="canonical") : &entry.title;
+                                    a(href=&entry.href) : &entry.title;
                                 }
                                 : entry.date.map(render::Date);
                             }
