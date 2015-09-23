@@ -11,8 +11,7 @@ path="src/main.rs"
 codegen-units=4
 
 [dependencies.gazetta]
-#git = "https://github.com/Stebalien/gazetta.git"
-path = "../gazetta"
+git = "https://github.com/Stebalien/gazetta.git"
 
 [dependencies]
 horrorshow = "*"
