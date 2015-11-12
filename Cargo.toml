@@ -14,4 +14,4 @@ codegen-units=4
 git = "https://github.com/Stebalien/gazetta.git"
 
 [dependencies]
-horrorshow = "*"
+horrorshow = "0.5"
