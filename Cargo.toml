@@ -2,6 +2,12 @@
 name = "gazetta-bin"
 version = "0.1.0"
 authors = ["Steven Allen <steven@stebalien.com>"]
+description = "A static site generator."
+documentation = "http://stebalien.com/projects/gazetta"
+homepage = "http://stebalien.com/projects/gazetta"
+repository = "https://github.com/Stebalien/gazetta"
+keywords = ["staticsite", "website", "blog"]
+license = "GPL-3.0"
 
 [[bin]]
 name="gazetta"
@@ -10,8 +16,6 @@ path="src/main.rs"
 [profile.dev]
 codegen-units=4
 
-[dependencies.gazetta]
-git = "https://github.com/Stebalien/gazetta.git"
-
 [dependencies]
 horrorshow = "0.5"
+gazetta = "0.1"
