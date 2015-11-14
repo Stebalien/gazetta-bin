@@ -1,1 +1,1 @@
-Part of Gazetta. See: https://github.com/Stebalien/gazetta
+Part of Gazetta. See: http://stebalien.com/projects/gazetta
