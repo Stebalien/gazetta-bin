@@ -1,8 +1,8 @@
 [root]
 name = "gazetta-bin"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
- "gazetta 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "horrorshow 0.5.4 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -13,7 +13,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "bitflags"
-version = "0.3.3"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -27,34 +27,35 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "1.5.5"
+version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "ansi_term 0.7.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "bitflags 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "bitflags 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "strsim 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "vec_map 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "vec_map 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "gazetta"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gazetta-cli 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "gazetta-core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta-cli 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta-core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "gazetta-model-ext 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "gazetta-render-ext 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "gazetta-cli"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "chrono 0.2.20 (registry+https://github.com/rust-lang/crates.io-index)",
- "clap 1.5.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "gazetta-core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "clap 2.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta-core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "horrorshow 0.5.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "slug 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -62,7 +63,7 @@ dependencies = [
 
 [[package]]
 name = "gazetta-core"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "chrono 0.2.20 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -79,7 +80,7 @@ name = "gazetta-model-ext"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gazetta-core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta-core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -88,7 +89,7 @@ name = "gazetta-render-ext"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gazetta-core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gazetta-core 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "horrorshow 0.5.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "pulldown-cmark 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -212,7 +213,7 @@ dependencies = [
 
 [[package]]
 name = "vec_map"
-version = "0.4.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
