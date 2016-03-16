@@ -17,5 +17,5 @@ path="src/main.rs"
 codegen-units=4
 
 [dependencies]
-horrorshow = "0.5"
+horrorshow = "0.5.4"
 gazetta = "0.1"

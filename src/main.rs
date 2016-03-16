@@ -13,6 +13,8 @@
  *  You should have received a copy of the GNU General Public License along with this program.  If
  *  not, see <http://www.gnu.org/licenses/>.
  */
+// Ok, I really shouldn't do this...
+#![recursion_limit="94"]
 
 #[macro_use]
 extern crate horrorshow;
