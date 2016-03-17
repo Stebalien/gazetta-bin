@@ -40,14 +40,16 @@ impl MyGazetta {
             @ if let Some(ref about) = page.about {
                 div(id="about") {
                     @ if let Some(ref photo) = about.photo {
-                        div(id="about-photo") img(src=photo, alt="Photo");
+                        div(id="about-photo") {
+                            img(src=photo, alt="Photo");
+                        }
                     }
                     div(id="about-name") {
                         div(id="about-realname") : &about.name;
                         @ if !about.nicknames.is_empty() {
                             ul(id="about-nicks") {
                                 @ for nick in &about.nicknames {
-                                    li : nick
+                                    li: nick
                                 }
                             }
                         }
@@ -56,15 +58,21 @@ impl MyGazetta {
                         @ if let Some(ref email) = about.email {
                             tr {
                                 th : "Email";
-                                td a(href=format_args!("mailto:{}", email)): &about.email;
+                                td {
+                                    a(href=format_args!("mailto:{}", email)): &about.email;
+                                }
                             }
                         }
                         @ if !about.also.is_empty() {
                             tr {
                                 th : "Also";
-                                td ul(id="about-also") {
-                                    @ for link in &about.also {
-                                        li a(href=&link.url, rel="nofollow me") : &link.text;
+                                td {
+                                    ul(id="about-also") {
+                                        @ for link in &about.also {
+                                            li {
+                                                a(href=&link.url, rel="nofollow me"): &link.text;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -72,7 +80,9 @@ impl MyGazetta {
                         @ if let Some(ref key) = about.key {
                             tr {
                                 th : "PGP Key";
-                                td a(href=&key.url) : &key.fingerprint;
+                                td {
+                                    a(href=&key.url): &key.fingerprint;
+                                }
                             }
                         }
                     }
@@ -86,7 +96,9 @@ impl MyGazetta {
                     @ for entry in idx.entries.iter() {
                         article {
                             header(class="title") {
-                                h1 a(href=&entry.href) : &entry.title;
+                                h1 {
+                                    a(href=&entry.href) : &entry.title;
+                                }
                                 : entry.date.map(render::Date);
                             }
                             div(class="content") : render::Content(entry);
@@ -94,27 +106,29 @@ impl MyGazetta {
                     }
                 }
                 @ if let Some(ref paginate) = idx.paginate {
-                    footer nav(id="page-pagination") {
-                        div {
-                            @ if paginate.current == 0 {
-                                span(class="prev disabled") : raw!("&larr; Previous");
-                            } else {
-                                a(href=paginate.pages[paginate.current-1],
-                                    class="prev",
-                                    rel="prev",
-                                    title="previous"
-                                    ) : raw!("&larr; Previous");
-                            }
+                    footer {
+                        nav(id="page-pagination") {
+                            div {
+                                @ if paginate.current == 0 {
+                                    span(class="prev disabled") : raw!("&larr; Previous");
+                                } else {
+                                    a(href=paginate.pages[paginate.current-1],
+                                      class="prev",
+                                      rel="prev",
+                                      title="previous"
+                                     ) : raw!("&larr; Previous");
+                                }
 
-                            span : format_args!("{} of {}", paginate.current + 1, paginate.pages.len());
-                            @ if paginate.current + 1 == paginate.pages.len() {
-                                span(class="next disabled") : raw!("Next &rarr;");
-                            } else {
-                                a(href=paginate.pages[paginate.current+1],
-                                    class="next",
-                                    rel="next",
-                                    title="next"
-                                    ) : raw!("Next &rarr;");
+                                span : format_args!("{} of {}", paginate.current + 1, paginate.pages.len());
+                                @ if paginate.current + 1 == paginate.pages.len() {
+                                    span(class="next disabled") : raw!("Next &rarr;");
+                                } else {
+                                    a(href=paginate.pages[paginate.current+1],
+                                      class="next",
+                                      rel="next",
+                                      title="next"
+                                     ) : raw!("Next &rarr;");
+                                }
                             }
                         }
                     }
@@ -147,17 +161,21 @@ impl Gazetta for MyGazetta {
                 }
                 body {
                     header(id="site-header") {
-                        h1 a(href="") : &site.title;
+                        h1 {
+                            a(href="") : &site.title
+                        }
 
                         @ if !site.nav.is_empty() {
-                            nav(id="site-nav") ul {
-                                @ for link in &site.nav {
-                                    li(class? = if page.href.starts_with(&link.url) {
-                                        Some("active")
-                                    } else {
-                                        None
-                                    }) {
-                                        a(href=&link.url) : &link.text
+                            nav(id="site-nav") {
+                                ul {
+                                    @ for link in &site.nav {
+                                        li(class? = if page.href.starts_with(&link.url) {
+                                            Some("active")
+                                        } else {
+                                            None
+                                        }) {
+                                            a(href=&link.url) : &link.text
+                                        }
                                     }
                                 }
                             }
@@ -174,9 +192,11 @@ impl Gazetta for MyGazetta {
                             }
                         }
                     }
-                    footer(id="site-footer") p {
-                        : raw!("&copy; ");
-                        span(id="site-author") : &site.author.name;
+                    footer(id="site-footer") {
+                        p {
+                            : raw!("&copy; ");
+                            span(id="site-author") : &site.author.name;
+                        }
                     }
                 }
             }
