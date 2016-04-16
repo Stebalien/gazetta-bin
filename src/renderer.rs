@@ -101,7 +101,13 @@ impl MyGazetta {
                                 }
                                 : entry.date.map(render::Date);
                             }
-                            div(class="content") : render::Content(entry);
+                            @ if idx.compact {
+                                @ if let Some(desc) = entry.description {
+                                    div(class="content") : render::Markdown::new(desc, entry.href);
+                                }
+                            } else {
+                                div(class="content") : render::Content(entry);
+                            }
                         }
                     }
                 }
