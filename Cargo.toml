@@ -17,6 +17,9 @@ path="src/main.rs"
 [profile.dev]
 codegen-units=4
 
+[profile.release]
+panic = "abort"
+
 [dependencies]
 horrorshow = "0.5"
 gazetta = "^0.1.2"
