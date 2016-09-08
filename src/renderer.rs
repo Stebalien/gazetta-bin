@@ -25,7 +25,7 @@ impl MyGazetta {
     fn render_page_inner(&self, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             header(id="page-header", class="title") {
-                h1 : &page.title;
+                h1(class="header") : &page.title;
                 : page.date.map(render::Date);
             }
             @ if let Some(ref person) = page.author {
@@ -96,7 +96,7 @@ impl MyGazetta {
                     @ for entry in idx.entries.iter() {
                         article {
                             header(class="title") {
-                                h1 {
+                                h1(class="header") {
                                     a(href=&entry.href) : &entry.title;
                                 }
                                 : entry.date.map(render::Date);
@@ -167,22 +167,18 @@ impl Gazetta for MyGazetta {
                 }
                 body {
                     header(id="site-header") {
-                        h1 {
-                            a(href="") : &site.title
-                        }
-
+                        a(class="header", href="") : &site.title;
                         @ if !site.nav.is_empty() {
                             nav(id="site-nav") {
-                                ul {
-                                    @ for link in &site.nav {
-                                        li(class? = if page.href.starts_with(&link.url) {
-                                            Some("active")
-                                        } else {
-                                            None
-                                        }) {
-                                            a(href=&link.url) : &link.text
-                                        }
-                                    }
+                                @ for link in &site.nav {
+                                    // Otherwise, they run together on text
+                                    // browsers
+                                    : " ";
+                                    a(href=&link.url, class? = if page.href.starts_with(&link.url) {
+                                        Some("active")
+                                    } else {
+                                        None
+                                    }) : &link.text;
                                 }
                             }
                         }
