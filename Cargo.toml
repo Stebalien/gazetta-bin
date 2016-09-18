@@ -18,6 +18,7 @@ path="src/main.rs"
 codegen-units=4
 
 [profile.release]
+lto = true
 panic = "abort"
 
 [dependencies]
