@@ -124,8 +124,9 @@ impl MyGazetta {
                                       title="previous"
                                      ) : raw!("&larr; Previous");
                                 }
-
+                                : " ";
                                 span : format_args!("{} of {}", paginate.current + 1, paginate.pages.len());
+                                : " ";
                                 @ if paginate.current + 1 == paginate.pages.len() {
                                     span(class="next disabled") : raw!("Next &rarr;");
                                 } else {
