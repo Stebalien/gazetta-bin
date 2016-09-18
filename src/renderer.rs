@@ -168,6 +168,7 @@ impl Gazetta for MyGazetta {
                 body {
                     header(id="site-header") {
                         a(class="header", href="") : &site.title;
+                        : " ";
                         @ if !site.nav.is_empty() {
                             nav(id="site-nav") {
                                 @ for link in &site.nav {
