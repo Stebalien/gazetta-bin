@@ -22,8 +22,8 @@ lto = true
 panic = "abort"
 
 [dependencies]
-horrorshow = "0.5"
-gazetta = "^0.1.2"
+horrorshow = "0.6"
+gazetta = "0.2"
 
 [build-dependencies]
-gazetta = "^0.1.2"
+gazetta = "0.2"

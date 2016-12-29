@@ -17,6 +17,7 @@
 use gazetta::prelude::*;
 use gazetta::render;
 use horrorshow::prelude::*;
+use horrorshow::helper::doctype;
 use gazetta::{ SourceMeta, EntryMeta, Site, Page };
 
 pub struct MyGazetta;
@@ -116,23 +117,23 @@ impl MyGazetta {
                         nav(id="page-pagination") {
                             div {
                                 @ if paginate.current == 0 {
-                                    span(class="prev disabled") : raw!("&larr; Previous");
+                                    span(class="prev disabled") : Raw("&larr; Previous");
                                 } else {
                                     a(href=paginate.pages[paginate.current-1],
                                       class="prev",
                                       rel="prev",
                                       title="previous"
-                                     ) : raw!("&larr; Previous");
+                                     ) : Raw("&larr; Previous");
                                 }
                                 span : format_args!(" {} of {} ", paginate.current + 1, paginate.pages.len());
                                 @ if paginate.current + 1 == paginate.pages.len() {
-                                    span(class="next disabled") : raw!("Next &rarr;");
+                                    span(class="next disabled") : Raw("Next &rarr;");
                                 } else {
                                     a(href=paginate.pages[paginate.current+1],
                                       class="next",
                                       rel="next",
                                       title="next"
-                                     ) : raw!("Next &rarr;");
+                                     ) : Raw("Next &rarr;");
                                 }
                             }
                         }
@@ -149,7 +150,7 @@ impl Gazetta for MyGazetta {
 
     fn render_page(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
-            : raw!("<!DOCTYPE html>");
+            : doctype::HTML;
             html(lang="en") {
                 head {
                     meta(charset="utf-8");
@@ -196,7 +197,7 @@ impl Gazetta for MyGazetta {
                     }
                     footer(id="site-footer") {
                         p {
-                            : raw!("&copy; ");
+                            : Raw("&copy; ");
                             span(id="site-author") : &site.author.name;
                         }
                     }
