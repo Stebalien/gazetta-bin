@@ -1,6 +1,6 @@
 [package]
 name = "gazetta-bin"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Steven Allen <steven@stebalien.com>"]
 description = "A static site generator."
 documentation = "http://stebalien.com/projects/gazetta"
@@ -23,7 +23,7 @@ panic = "abort"
 
 [dependencies]
 horrorshow = "0.6"
-gazetta = "0.2"
+gazetta = "0.2.1"
 
 [build-dependencies]
-gazetta = "0.2"
+gazetta = "0.2.1"
