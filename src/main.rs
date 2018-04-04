@@ -14,7 +14,7 @@
  *  not, see <http://www.gnu.org/licenses/>.
  */
 
-#![recursion_limit="94"]
+#![recursion_limit = "94"]
 
 #[macro_use]
 extern crate horrorshow;
