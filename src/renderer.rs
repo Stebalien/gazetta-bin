@@ -153,6 +153,7 @@ impl Gazetta for MyGazetta {
             : doctype::HTML;
             html(lang="en") {
                 head {
+                    link(rel="canonical", href=format_args!("{}{}{}", site.origin, site.prefix, page.href));
                     meta(charset="utf-8");
                     meta(name="viewport",
                          content="width=device-width, initial-scale=1.0");
