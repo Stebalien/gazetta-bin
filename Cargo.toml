@@ -1,6 +1,6 @@
 [package]
 name = "gazetta-bin"
-version = "0.2.2"
+version = "0.3.0"
 authors = ["Steven Allen <steven@stebalien.com>"]
 description = "A static site generator."
 documentation = "http://stebalien.com/projects/gazetta"
@@ -9,6 +9,7 @@ repository = "https://github.com/Stebalien/gazetta"
 keywords = ["staticsite", "website", "blog"]
 license = "GPL-3.0"
 build = "build.rs"
+edition = "2018"
 
 [[bin]]
 name="gazetta"
@@ -22,8 +23,8 @@ lto = true
 panic = "abort"
 
 [dependencies]
-horrorshow = "0.6"
-gazetta = "0.2.1"
+horrorshow = "0.7"
+gazetta = "0.3.0"
 
 [build-dependencies]
-gazetta = "0.2.1"
+gazetta = "0.3.0"

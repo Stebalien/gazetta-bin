@@ -16,9 +16,7 @@
 
 #![recursion_limit = "94"]
 
-#[macro_use]
-extern crate horrorshow;
-extern crate gazetta;
+use gazetta;
 
 mod renderer;
 

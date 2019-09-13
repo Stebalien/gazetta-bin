@@ -18,6 +18,7 @@ use gazetta::prelude::*;
 use gazetta::render;
 use gazetta::{EntryMeta, Page, Site, SourceMeta};
 use horrorshow::helper::doctype;
+use horrorshow::html;
 use horrorshow::prelude::*;
 
 pub struct MyGazetta;
