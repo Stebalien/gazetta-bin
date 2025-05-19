@@ -23,8 +23,10 @@ lto = true
 panic = "abort"
 
 [dependencies]
-horrorshow = "0.7"
-gazetta = "0.3.0"
+horrorshow = "0.8"
+gazetta = "0.4.0"
 
 [build-dependencies]
-gazetta = "0.3.0"
+clap_complete = "4.5.50"
+gazetta = "0.4.0"
+clap = "4.5.38"

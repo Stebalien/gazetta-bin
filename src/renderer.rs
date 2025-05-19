@@ -16,7 +16,8 @@
 
 use gazetta::prelude::*;
 use gazetta::render;
-use gazetta::{EntryMeta, Page, Site, SourceMeta};
+use gazetta::view::Context;
+use gazetta::{EntryMeta, Page, SourceMeta};
 use horrorshow::helper::doctype;
 use horrorshow::html;
 use horrorshow::prelude::*;
@@ -149,35 +150,39 @@ impl Gazetta for MyGazetta {
     type SiteMeta = SourceMeta;
     type PageMeta = EntryMeta;
 
-    fn render_page(&self, site: &Site<Self>, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
+    fn render_page(&self, ctx: &Context<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             : doctype::HTML;
             html(lang="en") {
                 head {
-                    link(rel="canonical", href=format_args!("{}{}{}", site.origin, site.prefix, page.href));
-                    meta(charset="utf-8");
+                    link(rel="canonical", href=format_args!(
+                        "{}{}{}",
+                        ctx.site.origin,
+                        ctx.site.prefix,
+                        ctx.page.href,
+                    ));
                     meta(name="viewport",
                          content="width=device-width, initial-scale=1.0");
-                    @ if let Some(ref person) = page.author {
+                    @ if let Some(ref person) = ctx.page.author {
                         meta(name="author", content=&person.name);
                     } else {
-                        meta(name="author", content=&site.author.name);
+                        meta(name="author", content=&ctx.site.author.name);
                     }
-                    title : &page.title;
+                    title : &ctx.page.title;
 
-                    : render::Assets(site);
+                    : render::Head(ctx);
                 }
                 body {
                     header(id="site-header") {
-                        a(class="header", href="") : &site.title;
+                        a(class="header", href="") : &ctx.site.title;
                         : " ";
-                        @ if !site.nav.is_empty() {
+                        @ if !ctx.site.nav.is_empty() {
                             nav(id="site-nav") {
-                                @ for link in &site.nav {
+                                @ for link in &ctx.site.nav {
                                     // Otherwise, they run together on text
                                     // browsers
                                     : " ";
-                                    a(href=&link.url, class? = if page.href.starts_with(&link.url) {
+                                    a(href=&link.url, class? = if ctx.page.href.starts_with(&link.url) {
                                         Some("active")
                                     } else {
                                         None
@@ -187,20 +192,20 @@ impl Gazetta for MyGazetta {
                         }
                     }
                     main(id="site-content") {
-                        @ if page.content.data.trim().is_empty() {
+                        @ if ctx.page.content.data.trim().is_empty() {
                             section {
-                                |tmpl| self.render_page_inner(page, tmpl);
+                                |tmpl| self.render_page_inner(ctx.page, tmpl);
                             }
                         } else {
                             article {
-                                |tmpl| self.render_page_inner(page, tmpl);
+                                |tmpl| self.render_page_inner(ctx.page, tmpl);
                             }
                         }
                     }
                     footer(id="site-footer") {
                         p {
                             : Raw("&copy; ");
-                            span(id="site-author") : &site.author.name;
+                            span(id="site-author") : &ctx.site.author.name;
                         }
                     }
                 }
