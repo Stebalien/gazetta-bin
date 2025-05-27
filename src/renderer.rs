@@ -106,7 +106,7 @@ impl MyGazetta {
                             }
                             @ if idx.compact {
                                 @ if let Some(desc) = entry.description {
-                                    div(class="content") : render::Markdown::new(desc, entry.href);
+                                    div(class="content") : desc;
                                 }
                             } else {
                                 div(class="content") : render::Content(entry);
