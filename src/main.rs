@@ -14,10 +14,6 @@
  *  not, see <http://www.gnu.org/licenses/>.
  */
 
-#![recursion_limit = "94"]
-
-use gazetta;
-
 mod renderer;
 
 fn main() {

@@ -17,21 +17,22 @@
 use gazetta::prelude::*;
 use gazetta::render;
 use gazetta::view::Context;
-use gazetta::{EntryMeta, Page, SourceMeta};
+use gazetta::{EntryMeta, SourceMeta};
 use horrorshow::helper::doctype;
-use horrorshow::html;
 use horrorshow::prelude::*;
+use horrorshow::Escape;
+use horrorshow::{html, xml};
 
 pub struct MyGazetta;
 
 impl MyGazetta {
-    fn render_page_inner(&self, page: &Page<Self>, tmpl: &mut TemplateBuffer) {
+    fn render_page_inner(&self, ctx: &Context<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
             header(id="page-header", class="title") {
-                h1(class="header") : &page.title;
-                : page.date.map(render::Date);
+                h1(class="header") : &ctx.page.title;
+                : ctx.page.date.map(render::Date);
             }
-            @ if let Some(ref person) = page.author {
+            @ if let Some(ref person) = ctx.page.author {
                 span(id="page-author") {
                     @ if let Some(ref email) = person.email {
                         a(href=format_args!("mailto:{}", email)) : &person.name;
@@ -40,7 +41,7 @@ impl MyGazetta {
                     }
                 }
             }
-            @ if let Some(ref about) = page.about {
+            @ if let Some(ref about) = ctx.page.about {
                 div(id="about") {
                     @ if let Some(ref photo) = about.photo {
                         div(id="about-photo") {
@@ -91,10 +92,13 @@ impl MyGazetta {
                     }
                 }
             }
-            @ if !page.content.data.trim().is_empty() {
-                div(id="page-content", class="content") : render::Content(page);
+            @ if !ctx.page.content.data.trim().is_empty() {
+                div(id="page-content", class="content") : render::Content {
+                    base : ctx.page.href,
+                    content: &ctx.page.content,
+                };
             }
-            @ if let Some(ref idx) = page.index {
+            @ if let Some(ref idx) = ctx.page.index {
                 div(id="page-index") {
                     @ for entry in idx.entries.iter() {
                         article {
@@ -109,7 +113,10 @@ impl MyGazetta {
                                     div(class="content") : desc;
                                 }
                             } else {
-                                div(class="content") : render::Content(entry);
+                                div(class="content") : render::Content {
+                                    base : entry.href,
+                                    content: &entry.content,
+                                };
                             }
                         }
                     }
@@ -149,6 +156,31 @@ impl MyGazetta {
 impl Gazetta for MyGazetta {
     type SiteMeta = SourceMeta;
     type PageMeta = EntryMeta;
+
+    fn render_feed_head(&self, ctx: &Context<Self>, tmpl: &mut TemplateBuffer) {
+        let author = ctx.page.author.as_ref().unwrap_or(&ctx.site.author);
+        tmpl << xml! {
+            author {
+                name : &author.name;
+                email : &author.email;
+            }
+        }
+    }
+
+    fn render_feed_entry(&self, ctx: &Context<Self>, tmpl: &mut TemplateBuffer) {
+        tmpl << xml! {
+            @ if let Some(author) = &ctx.page.author {
+                author {
+                    name : &author.name;
+                    email : &author.email;
+                }
+            }
+            content(type="html") : Escape(render::Content {
+                base: &format!("{}{}{}", ctx.site.origin, ctx.site.prefix, ctx.page.href),
+                content: &ctx.page.content,
+            });
+        }
+    }
 
     fn render_page(&self, ctx: &Context<Self>, tmpl: &mut TemplateBuffer) {
         tmpl << html! {
@@ -194,11 +226,11 @@ impl Gazetta for MyGazetta {
                     main(id="site-content") {
                         @ if ctx.page.content.data.trim().is_empty() {
                             section {
-                                |tmpl| self.render_page_inner(ctx.page, tmpl);
+                                |tmpl| self.render_page_inner(ctx, tmpl);
                             }
                         } else {
                             article {
-                                |tmpl| self.render_page_inner(ctx.page, tmpl);
+                                |tmpl| self.render_page_inner(ctx, tmpl);
                             }
                         }
                     }
