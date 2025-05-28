@@ -203,26 +203,14 @@ dependencies = [
 
 [[package]]
 name = "gazetta"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca5091dd0b9a41890e6ed321bd05d67d2faf0f4f701606aba396bc47b20b0776"
-dependencies = [
- "gazetta-cli 0.4.0",
- "gazetta-core 0.4.0",
- "gazetta-model-ext 0.4.0",
- "gazetta-render-ext 0.4.0",
-]
-
-[[package]]
-name = "gazetta"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5f22384ee59ed58ebbc90d75825959f1f7f0a8136738fb80e5b2b81072f88e52"
 dependencies = [
- "gazetta-cli 0.5.0",
- "gazetta-core 0.5.0",
- "gazetta-model-ext 0.5.0",
- "gazetta-render-ext 0.5.0",
+ "gazetta-cli",
+ "gazetta-core",
+ "gazetta-model-ext",
+ "gazetta-render-ext",
 ]
 
 [[package]]
@@ -231,23 +219,8 @@ version = "0.5.0"
 dependencies = [
  "clap",
  "clap_complete",
- "gazetta 0.4.0",
- "gazetta 0.5.0",
+ "gazetta",
  "horrorshow",
-]
-
-[[package]]
-name = "gazetta-cli"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "325881cff70224b46aa49ca529f99c5af58c8c4f8eede779cea27c98b74577c8"
-dependencies = [
- "chrono",
- "clap",
- "gazetta-core 0.4.0",
- "horrorshow",
- "lazy_static",
- "slug",
 ]
 
 [[package]]
@@ -258,25 +231,10 @@ checksum = "26bc92af8a1cf28f2cf477a5cbfdc8a6ef85d0d06c1060eba5a35b4e26920e51"
 dependencies = [
  "chrono",
  "clap",
- "gazetta-core 0.5.0",
+ "gazetta-core",
  "horrorshow",
  "lazy_static",
  "slug",
-]
-
-[[package]]
-name = "gazetta-core"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5e2b0b89451028c5db5c00f30a68f33417de2456793427beadcfcf147735fc18"
-dependencies = [
- "chrono",
- "glob",
- "horrorshow",
- "lazy_static",
- "str_stack",
- "url",
- "yaml-rust",
 ]
 
 [[package]]
@@ -298,33 +256,12 @@ dependencies = [
 
 [[package]]
 name = "gazetta-model-ext"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c3e5f705a7c3f24ce48d8cedd1769d67342dc18a0950b2e4993af0d73a822ea"
-dependencies = [
- "gazetta-core 0.4.0",
- "lazy_static",
-]
-
-[[package]]
-name = "gazetta-model-ext"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8cd69e4327108593b904d9245d126fedb604d002ff00973306b731fc7695a8a6"
 dependencies = [
- "gazetta-core 0.5.0",
+ "gazetta-core",
  "lazy_static",
-]
-
-[[package]]
-name = "gazetta-render-ext"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5969355ed68eee45cf53d1f0ddfad3b8d9a7ea827ead06086315cba670b4a72"
-dependencies = [
- "gazetta-core 0.4.0",
- "horrorshow",
- "pulldown-cmark",
 ]
 
 [[package]]
@@ -333,18 +270,9 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "766dfd9da46dd4e4456911cde252f31f4dcaf190b9a2d129db7420bdced3828a"
 dependencies = [
- "gazetta-core 0.5.0",
+ "gazetta-core",
  "horrorshow",
  "pulldown-cmark",
-]
-
-[[package]]
-name = "getopts"
-version = "0.2.21"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14dbbfd5c71d70241ecf9e6f13737f7b5ce823821063188d7e46c41d371eebd5"
-dependencies = [
- "unicode-width",
 ]
 
 [[package]]
@@ -649,17 +577,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1e8bbe1a966bd2f362681a44f6edce3c2310ac21e4d5067a6e7ec396297a6ea0"
 dependencies = [
  "bitflags",
- "getopts",
  "memchr",
- "pulldown-cmark-escape",
  "unicase",
 ]
-
-[[package]]
-name = "pulldown-cmark-escape"
-version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "007d8adb5ddab6f8e3f491ac63566a7d5002cc7ed73901f72057943fa71ae1ae"
 
 [[package]]
 name = "quote"
@@ -799,12 +719,6 @@ name = "unicode-ident"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5a5f39404a5da50712a4c1eecf25e90dd62b613502b7e925fd4e4d19b5c96512"
-
-[[package]]
-name = "unicode-width"
-version = "0.1.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af"
 
 [[package]]
 name = "url"
