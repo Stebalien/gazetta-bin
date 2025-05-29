@@ -1,6 +1,6 @@
 [package]
 name = "gazetta-bin"
-version = "0.5.3"
+version = "0.5.4"
 authors = ["Steven Allen <steven@stebalien.com>"]
 description = "A static site generator."
 documentation = "http://stebalien.com/projects/gazetta"
