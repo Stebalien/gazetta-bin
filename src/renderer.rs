@@ -108,15 +108,19 @@ impl MyGazetta {
                                 }
                                 : entry.date.map(render::Date);
                             }
-                            @ if idx.compact {
+                            div(class="content") {
                                 @ if let Some(desc) = entry.description {
-                                    div(class="content") : desc;
+                                    : desc;
+                                    hr;
                                 }
-                            } else {
-                                div(class="content") : render::Content {
-                                    base : entry.href,
-                                    content: &entry.content,
-                                };
+                                @ if entry.description.is_none() && !idx.compact {
+                                    : render::Content {
+                                        base : entry.href,
+                                        content: &entry.content,
+                                    };
+                                } else {
+                                    a(href=&entry.href) : "Read more..."
+                                }
                             }
                         }
                     }
