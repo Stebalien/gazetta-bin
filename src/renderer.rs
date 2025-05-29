@@ -180,7 +180,7 @@ impl Gazetta for MyGazetta {
                 }
             }
             content(type="html") : Escape(render::Content {
-                base: &format!("{}{}{}", ctx.site.origin, ctx.site.prefix, ctx.page.href),
+                base: &ctx.canonical_url().to_string(),
                 content: &ctx.page.content,
             });
         }
@@ -191,12 +191,7 @@ impl Gazetta for MyGazetta {
             : doctype::HTML;
             html(lang="en") {
                 head {
-                    link(rel="canonical", href=format_args!(
-                        "{}{}{}",
-                        ctx.site.origin,
-                        ctx.site.prefix,
-                        ctx.page.href,
-                    ));
+                    link(rel="canonical", href=ctx.canonical_url());
                     meta(name="viewport",
                          content="width=device-width, initial-scale=1.0");
                     @ if let Some(ref person) = ctx.page.author {
