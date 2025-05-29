@@ -104,7 +104,7 @@ impl MyGazetta {
                         article {
                             header(class="title") {
                                 h1(class="header") {
-                                    a(href=&entry.href) : &entry.title;
+                                    a(href=&entry.href, rel="bookmark") : &entry.title;
                                 }
                                 : entry.date.map(render::Date);
                             }
