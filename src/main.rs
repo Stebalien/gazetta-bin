@@ -17,5 +17,5 @@
 mod renderer;
 
 fn main() {
-    gazetta::cli::run(renderer::MyGazetta)
+    gazetta::cli::run_with_version(renderer::MyGazetta, env!("CARGO_PKG_VERSION"))
 }
