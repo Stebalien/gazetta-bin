@@ -9,7 +9,7 @@ repository = "https://github.com/Stebalien/gazetta"
 keywords = ["staticsite", "website", "blog"]
 license = "GPL-3.0"
 build = "build.rs"
-edition = "2018"
+edition = "2024"
 
 [[bin]]
 name="gazetta"

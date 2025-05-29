@@ -18,9 +18,9 @@ use gazetta::prelude::*;
 use gazetta::render;
 use gazetta::view::Context;
 use gazetta::{EntryMeta, SourceMeta};
+use horrorshow::Escape;
 use horrorshow::helper::doctype;
 use horrorshow::prelude::*;
-use horrorshow::Escape;
 use horrorshow::{html, xml};
 
 pub struct MyGazetta;
