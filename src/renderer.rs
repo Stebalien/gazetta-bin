@@ -96,6 +96,7 @@ impl MyGazetta {
                 div(id="page-content", class="content") : render::Content {
                     base : ctx.page.href,
                     content: &ctx.page.content,
+                    syntax_highlight: true,
                 };
             }
             @ if let Some(ref idx) = ctx.page.index {
@@ -117,6 +118,7 @@ impl MyGazetta {
                                     : render::Content {
                                         base : entry.href,
                                         content: &entry.content,
+                                        syntax_highlight: true,
                                     };
                                 } else {
                                     a(href=&entry.href) : "Read more..."
@@ -182,6 +184,7 @@ impl Gazetta for MyGazetta {
             content(type="html") : Escape(render::Content {
                 base: &ctx.canonical_url().to_string(),
                 content: &ctx.page.content,
+                syntax_highlight: false,
             });
         }
     }
