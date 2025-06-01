@@ -224,9 +224,9 @@ dependencies = [
 
 [[package]]
 name = "gazetta"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8eabc6c0a95e9283f1e45e3aed60a19c44a4198dce71127308c90b9954ede707"
+checksum = "73a299f65c4484fa7a563f683cdbd49c9ae4684cdef6d915bf99aa28fc12acdf"
 dependencies = [
  "gazetta-cli",
  "gazetta-core",
@@ -246,9 +246,9 @@ dependencies = [
 
 [[package]]
 name = "gazetta-cli"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "354b3a232b9f56e23e2789172aceb04e5d249cefbfc8e389fce8ddd30bde4db7"
+checksum = "a633b65ae053a415032b695339d0693457347021fb14660d3d17c0c29ff5a036"
 dependencies = [
  "chrono",
  "clap",
@@ -259,9 +259,9 @@ dependencies = [
 
 [[package]]
 name = "gazetta-core"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1aee96b7760eb0e207a918c76d47c3fdb024638801ba0fa587da2d328309b66"
+checksum = "a322ff650b7840f1aa75d2f0a49002a132003ff9a911b23063ed06b16c3663b3"
 dependencies = [
  "chrono",
  "glob",
@@ -275,18 +275,18 @@ dependencies = [
 
 [[package]]
 name = "gazetta-model-ext"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce62b8c3f48d76e8cefb6ad553a598d5cecc76b39764113837fb079bad2d9bc4"
+checksum = "b62ca5ef16669613dbc4a1456fc178f2e61e18b46012193967300f6333894688"
 dependencies = [
  "gazetta-core",
 ]
 
 [[package]]
 name = "gazetta-render-ext"
-version = "0.6.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e72623ddeb77ba51668ea72fbe4eb0de02dcd06489650d61dbde52f429f6615a"
+checksum = "9c2a0eb4a9258e3d7746469599b6dab17513af04b90beefa209ade6fcc06e7dd"
 dependencies = [
  "gazetta-core",
  "horrorshow",

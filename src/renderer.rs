@@ -19,6 +19,7 @@ use gazetta::render;
 use gazetta::view::Context;
 use gazetta::{EntryMeta, SourceMeta};
 use horrorshow::Escape;
+use horrorshow::Join;
 use horrorshow::helper::doctype;
 use horrorshow::prelude::*;
 use horrorshow::{html, xml};
@@ -197,10 +198,13 @@ impl Gazetta for MyGazetta {
                     link(rel="canonical", href=ctx.canonical_url());
                     meta(name="viewport",
                          content="width=device-width, initial-scale=1.0");
-                    @ if let Some(ref person) = ctx.page.author {
+                    @ if let Some(person) = &ctx.page.author {
                         meta(name="author", content=&person.name);
                     } else {
                         meta(name="author", content=&ctx.site.author.name);
+                    }
+                    @ if let Some(robots) = &ctx.page.meta.robots {
+                        meta(name="robots", content=Join(", ", robots));
                     }
                     title : &ctx.page.title;
 
