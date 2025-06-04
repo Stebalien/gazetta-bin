@@ -43,14 +43,14 @@ impl MyGazetta {
                 }
             }
             @ if let Some(ref about) = ctx.page.about {
-                div(id="about") {
+                div(id="about", itemscope, itemtype="https://schema.org/Person") {
                     @ if let Some(ref photo) = about.photo {
                         div(id="about-photo") {
-                            img(src=photo, alt="Photo");
+                            img(src=photo, alt="Photo", itemprop="image");
                         }
                     }
                     div(id="about-name") {
-                        div(id="about-realname") : &about.name;
+                        div(id="about-realname", itemprop="name") : &about.name;
                         @ if !about.nicknames.is_empty() {
                             ul(id="about-nicks") {
                                 @ for nick in &about.nicknames {
@@ -64,7 +64,7 @@ impl MyGazetta {
                             tr {
                                 th : "Email";
                                 td {
-                                    a(href=format_args!("mailto:{}", email)): &about.email;
+                                    a(href=format_args!("mailto:{}", email), itemprop="email"): &about.email;
                                 }
                             }
                         }
