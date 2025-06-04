@@ -112,7 +112,9 @@ impl MyGazetta {
                             }
                             div(class="content") {
                                 @ if let Some(desc) = entry.description {
-                                    : desc;
+                                    @ for p in desc.split("\n\n") {
+                                        p : p;
+                                    }
                                     hr;
                                 }
                                 @ if entry.description.is_none() && !idx.compact {
