@@ -95,7 +95,8 @@ impl MyGazetta {
             }
             @ if !ctx.page.content.data.trim().is_empty() {
                 div(id="page-content", class="content") : render::Content {
-                    base : ctx.page.href,
+                    root: None,
+                    path : ctx.page.href,
                     content: &ctx.page.content,
                     syntax_highlight: true,
                 };
@@ -119,7 +120,8 @@ impl MyGazetta {
                                 }
                                 @ if entry.description.is_none() && !idx.compact {
                                     : render::Content {
-                                        base : entry.href,
+                                        root: None,
+                                        path: entry.href,
                                         content: &entry.content,
                                         syntax_highlight: true,
                                     };
@@ -185,7 +187,8 @@ impl Gazetta for MyGazetta {
                 }
             }
             content(type="html") : Escape(render::Content {
-                base: &ctx.canonical_url().to_string(),
+                root: Some(&ctx.site.base().to_string()),
+                path: ctx.page.href,
                 content: &ctx.page.content,
                 syntax_highlight: false,
             });
