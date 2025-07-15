@@ -116,7 +116,6 @@ impl MyGazetta {
                                     @ for p in desc.split("\n\n") {
                                         p : p;
                                     }
-                                    hr;
                                 }
                                 @ if entry.description.is_none() && !idx.compact {
                                     : render::Content {
