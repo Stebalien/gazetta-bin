@@ -125,7 +125,7 @@ impl MyGazetta {
                                         syntax_highlight: true,
                                     };
                                 } else {
-                                    a(href=&entry.href) : "Read more..."
+                                    a(href=&entry.href, class="read-more") : "Read more..."
                                 }
                             }
                         }
