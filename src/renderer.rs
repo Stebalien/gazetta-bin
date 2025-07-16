@@ -37,7 +37,7 @@ impl MyGazetta {
                         ul {
                             @ for page in ctx.page.references {
                                 li {
-                                    a(href = page.href) : page.title;
+                                    a(href=page.href, rel="tag") : page.title;
                                 }
                             }
                         }
