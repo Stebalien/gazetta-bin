@@ -32,6 +32,17 @@ impl MyGazetta {
             header(id="page-header", class="title") {
                 h1(class="header") : &ctx.page.title;
                 : ctx.page.date.map(render::Date);
+                @ if !ctx.page.references.is_empty() {
+                    nav(class = "references") {
+                        ul {
+                            @ for page in ctx.page.references {
+                                li {
+                                    a(href = page.href) : page.title;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             @ if let Some(ref person) = ctx.page.author {
                 span(id="page-author") {
@@ -42,6 +53,7 @@ impl MyGazetta {
                     }
                 }
             }
+
             @ if let Some(ref about) = ctx.page.about {
                 div(id="about", itemscope, itemtype="https://schema.org/Person") {
                     @ if let Some(ref photo) = about.photo {
@@ -110,7 +122,19 @@ impl MyGazetta {
                                     a(href=&entry.href, rel="bookmark") : &entry.title;
                                 }
                                 : entry.date.map(render::Date);
+                                @ if !entry.references.is_empty() {
+                                    nav(class = "references") {
+                                        ul {
+                                            @ for page in entry.references {
+                                                li {
+                                                    a(href = page.href) : page.title;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
+
                             div(class="content") {
                                 @ if let Some(desc) = entry.description {
                                     @ for p in desc.split("\n\n") {

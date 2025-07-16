@@ -224,9 +224,9 @@ dependencies = [
 
 [[package]]
 name = "gazetta"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "76d79d1778fb11c22f9203112ce1ef164a91e29150c9e20116fbfd809cf18409"
+checksum = "59a72458d073cc8d6bb48b2d57c5644252bdba585ef13eecd5c15744aa200e04"
 dependencies = [
  "gazetta-cli",
  "gazetta-core",
@@ -246,9 +246,9 @@ dependencies = [
 
 [[package]]
 name = "gazetta-cli"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2de41b2b24d14f2728285e8dacff879c82573324aa968c1689bd5426de2276e"
+checksum = "f87c5f9212098125b149dd21c55edd5e07e6207936359e36cc15dc1b69ddcdef"
 dependencies = [
  "chrono",
  "clap",
@@ -259,12 +259,11 @@ dependencies = [
 
 [[package]]
 name = "gazetta-core"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b7c929b54116f27f2fa1aead7062af274ca15b84cd9b7bdaab4167ba91d937cf"
+checksum = "819552662cf7afab8a2199c7954c3f2550a3afea215c654295e14698f0645306"
 dependencies = [
  "chrono",
- "glob",
  "horrorshow",
  "icu_collator",
  "str_stack",
@@ -275,18 +274,18 @@ dependencies = [
 
 [[package]]
 name = "gazetta-model-ext"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e2843362487bd0b96963cef94aaa715b43bd76ffd353ca90fd8b8144fd6ea727"
+checksum = "143d0dc2e16c6d03a783f11254cade003d99b5c18968747d3e347827a15b3823"
 dependencies = [
  "gazetta-core",
 ]
 
 [[package]]
 name = "gazetta-render-ext"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53ab085cb68b71cf18d07afebb2d50aa889a9be2ded6c8a2713dfafdc3752491"
+checksum = "38b7c50b7501685c631cc82ecbb3c590c09328d51f8c79d055f7cb1325db10c6"
 dependencies = [
  "gazetta-core",
  "horrorshow",
@@ -294,12 +293,6 @@ dependencies = [
  "pulldown-cmark",
  "v_htmlescape",
 ]
-
-[[package]]
-name = "glob"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8d1add55171497b4705a648c6b583acafb01d58050a51727785f0b2c8e0a2b2"
 
 [[package]]
 name = "hashbrown"
