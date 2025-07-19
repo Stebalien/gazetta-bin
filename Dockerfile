@@ -7,7 +7,7 @@ RUN cargo build --release --bin gazetta
 
 # Final stage
 FROM alpine:latest
-RUN apk add --no-cache bash findutils gzip zstd
+RUN apk add --no-cache bash findutils gzip brotli
 WORKDIR /app
 COPY --from=builder /usr/src/app/target/release/gazetta /usr/local/bin/
 ENTRYPOINT ["gazetta"]
