@@ -242,7 +242,7 @@ impl Gazetta for MyGazetta {
                 }
                 body {
                     header(id="site-header") {
-                        a(class="header", href="") : &ctx.site.title;
+                        a(class="header", href="", rel="home") : &ctx.site.title;
                         : " ";
                         @ if !ctx.site.nav.is_empty() {
                             nav(id="site-nav") {
